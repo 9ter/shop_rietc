@@ -314,7 +314,7 @@ $result_shop = $stmt_shop->get_result();
 
                                 if ($result->num_rows > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr><td>" . $row['id_user'] . "</td> ";
+                                        echo "<tr><td>" . $row['user'] . "</td> ";
                                         echo "<td>" . $row['fname'] . "</td> ";
                                         echo "<td>" . $row['lname'] . "</td> ";
                                         echo "<td> <a class='btn btn-sm btn-primary' href='payment.php?id_user=" . $row['id_user'] . "'> เติมเงิน </a></td> </tr> ";
@@ -381,7 +381,7 @@ $result_shop = $stmt_shop->get_result();
             const ul = document.createElement('ul');
             results.forEach(result => {
                 const li = document.createElement('li');
-                li.textContent = `${result.id_user} - ${result.fname} ${result.lname}`;
+                li.textContent = `${result.user} - ${result.fname} ${result.lname}`;
                 li.addEventListener('click', () => {
                     document.getElementById('search-input').value = result.id_user;
                     resultsContainer.style.display = 'none';

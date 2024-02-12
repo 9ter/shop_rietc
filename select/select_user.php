@@ -7,11 +7,11 @@ $searchTerm = isset($_GET['term']) ? $_GET['term'] : '';
 $searchTerm = mysqli_real_escape_string($conn, $searchTerm);
 
 // Use prepared statements for the query
-$sql = "SELECT * FROM user WHERE (id_user LIKE ? OR fname LIKE ? OR lname LIKE ?) AND perm = 2";
+$sql = "SELECT * FROM user WHERE (id_user LIKE ? OR user LIKE ? OR fname LIKE ? OR lname LIKE ?) AND perm = 2";
 
 $stmt = $conn->prepare($sql);
 $searchTerm = "%" . $searchTerm . "%";
-$stmt->bind_param("sss", $searchTerm, $searchTerm, $searchTerm);
+$stmt->bind_param("ssss", $searchTerm, $searchTerm, $searchTerm, $searchTerm);
 $stmt->execute();
 if ($stmt->errno) {
     die("Execute failed: " . $stmt->error);
@@ -29,6 +29,7 @@ $data = array();
 while ($row = $result->fetch_assoc()) {
     $userObject = array(
         'id_user' => $row['id_user'],
+        'user' => $row['user'],
         'fname' => $row['fname'],
         'lname' => $row['lname']
     );

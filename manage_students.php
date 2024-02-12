@@ -253,9 +253,6 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
                             <button class="nav-link text-warning" id="nav-profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">เพิ่มนักศึกษา EXCEL</button>
-                            <button class="nav-link text-info" id="nav-contact-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
-                                aria-selected="false">เพิ่มพนักงาน</button>
                         </div>
                     </nav>
                     <div class="tab-content pt-3" id="nav-tabContent">
@@ -264,12 +261,12 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
                             <div class="col-sm-12 col-xl-6">
                                 <div class="bg-secondary rounded h-100 p-4">
                                     <h6 class="mb-4">เพิ่มนักศึกษา</h6>
-                                    <form action="manage/add_staff.php" method="post">
+                                    <form action="manage/add_student.php" method="post">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">รหัส นศ.</label>
                                             <input type="number" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" name="id_user" title="รหัสตัวเลขเท่านั้น"
-                                                autocomplete="off" required>
+                                                aria-describedby="emailHelp" name="user" title="รหัสตัวเลขเท่านั้น"
+                                                autocomplete="off" pattern="[0-9]{6,}" title="รหัส นศ." required>
                                             <div id="emailHelp" class="form-text">รหัสนักศึกษาจะเป็น user เข้าสู่ระบบ
                                             </div>
                                         </div>
@@ -305,42 +302,6 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <div class="col-sm-12 col-xl-6">
-                                <div class="bg-secondary rounded h-100 p-4">
-                                    <h6 class="mb-4">เพิ่มพนักงาน</h6>
-                                    <form action="manage/add_staff.php" method="post">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">USER</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" name="user" pattern="[A-Za-z0-9]{4,}"
-                                                title="รหัสผ่านควรประกอบด้วยตัวอักษรและตัวเลขเท่านั้น และต้องมีอย่างน้อย 4 ตัวอักษรหรือตัวเลข"
-                                                autocomplete="off" required>
-                                            <div id="emailHelp" class="form-text">user เข้าสู่ระบบ
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                                name="pass" pattern="[A-Za-z0-9]{8,}"
-                                                title="รหัสผ่านควรมีอย่างน้อย 8 ตัวอักษร A-Z a-z 0-9" autocomplete="off"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ชื่อ</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1"
-                                                name="fname" autocomplete="off" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">นามสกุล</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1"
-                                                name="lname" autocomplete="off" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">บันทึก</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -349,11 +310,11 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary rounded h-100 p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">พนักงานเติมเงิน</h6>
+                        <h6 class="mb-0">นักศึกษา</h6>
                         <form method="get" action="manage/staff_edit.php" class="d-none d-md-flex ms-4">
-                            <input type="text" class="form-control" id="search-input1"
-                                placeholder="ID USER ชื่อพนักงาน..." oninput="showResults1(this.value)" name="id_user"
-                                autocomplete="off" style="background-color: #ffffff;" required>
+                            <input type="text" class="form-control" id="search-input1" placeholder="ID USER นักศึกษา..."
+                                oninput="showResults1(this.value)" name="id_user" autocomplete="off"
+                                style="background-color: #ffffff;" required>
                             <div id="search-results1"></div>
                             <button type="submit" class="btn btn-primary rounded-pill m-2">ค้นหา</button>
                         </form>
@@ -368,9 +329,6 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
                             <button class="nav-link text-danger" id="nav-profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-profile1" type="button" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">NON ACTIVE</button>
-                            <button class="nav-link text-info" id="nav-contact-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-contact1" type="button" role="tab" aria-controls="nav-contact"
-                                aria-selected="false">เพิ่มพนักงาน</button>
                         </div>
                     </nav>
                     <div class="tab-content pt-3" id="nav-tabContent">
@@ -447,42 +405,6 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-contact1" role="tabpanel" aria-labelledby="nav-contact-tab">
-                            <div class="col-sm-12 col-xl-6">
-                                <div class="bg-secondary rounded h-100 p-4">
-                                    <h6 class="mb-4">เพิ่มพนักงาน</h6>
-                                    <form action="manage/add_staff.php" method="post">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">USER</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1"
-                                                aria-describedby="emailHelp" name="user" pattern="[A-Za-z0-9]{4,}"
-                                                title="รหัสผ่านควรประกอบด้วยตัวอักษรและตัวเลขเท่านั้น และต้องมีอย่างน้อย 4 ตัวอักษรหรือตัวเลข"
-                                                autocomplete="off" required>
-                                            <div id="emailHelp" class="form-text">user เข้าสู่ระบบ
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                                name="pass" pattern="[A-Za-z0-9]{8,}"
-                                                title="รหัสผ่านควรมีอย่างน้อย 8 ตัวอักษร A-Z a-z 0-9" autocomplete="off"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">ชื่อ</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1"
-                                                name="fname" autocomplete="off" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">นามสกุล</label>
-                                            <input type="text" class="form-control" id="exampleInputPassword1"
-                                                name="lname" autocomplete="off" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">บันทึก</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -546,11 +468,54 @@ $result_student_nonactive = $conn->query($sql_student_nonactive);
             resultsContainer.style.display = 'block';
         }
 
+        function showResults1(query) {
+            if (query.trim() === '') {
+                // If query is empty, close dropdown
+                document.getElementById('search-results1').style.display = 'none';
+                return;
+            }
+
+            // Use AJAX to fetch data from the server
+            $.ajax({
+                url: 'select/select_user.php',
+                type: 'GET',
+                data: { term: query },
+                dataType: 'json',
+                success: function (data) {
+                    displayResults1(data);
+                }
+            });
+        }
+
+        function displayResults1(results) {
+            const resultsContainer = document.getElementById('search-results1');
+            resultsContainer.innerHTML = '';
+
+            if (results.length === 0) {
+                resultsContainer.style.display = 'none'; // ถ้าไม่มีข้อมูลให้ซ่อน dropdown
+                return;
+            }
+
+            const ul = document.createElement('ul');
+            results.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = `${result.user} - ${result.fname} ${result.lname}`;
+                li.addEventListener('click', () => {
+                    document.getElementById('search-input1').value = result.id_user;
+                    resultsContainer.style.display = 'none';
+                });
+                ul.appendChild(li);
+            });
+            resultsContainer.appendChild(ul);
+            resultsContainer.style.display = 'block';
+        }
+
         // Close dropdown when clicking outside
         document.addEventListener('click', function (event) {
             const container = document.getElementById('search-container');
             if (!container.contains(event.target)) {
                 document.getElementById('search-results').style.display = 'none';
+                document.getElementById('search-results1').style.display = 'none';
             }
         });
     </script>

@@ -177,7 +177,7 @@ $conn->close();
                         <h6 class="mb-0">
                             <?php echo $_SESSION['username'] ?>
                         </h6>
-                        <span>Admin</span>
+                        <span> <?php echo $rank ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -290,33 +290,14 @@ $conn->close();
 
 
             <!-- Table Start -->
-            <div class="container-fluid pt-4 px-4">
+            <?php
+            if ($perm == 0 || $perm == 3) {
+                echo ' <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-100 p-4">
                             <h6 class="mb-4">เติมเงิน</h6>
-                            <?php /*
-               if ($id_user == null) {
-
-                   echo '';
-               } else {
-
-                   echo '<form action="insert_log/insert_payment.php?id_user=' . $id_user . '" method="post">';
-                   echo ' <div class="mb-3">';
-                   echo '<label for="exampleInputEmail1" class="form-label">จำนวนเงินที่ต้องการเติม</label>';
-                   echo '<input type="number" class="form-control" id="search-input" placeholder="จำนวนเงิน"
-                   name="price" autocomplete="off" step="0.01">';
-                   echo '<br>';
-                   echo '<label for="exampleInputEmail1" class="form-label">รหัสผ่าน</label>';
-                   echo ' <input type="password" class="form-control" id="password" placeholder="Password"
-                   name="password">';
-                   echo '</div>';
-                   echo '<button type="submit" class="btn btn-primary">ตกลง</button>';
-                   echo '</form>';
-               }
-*/
-                            ?>
-                            <form action="insert_log/insert_payment.php?id_user=<?php echo $id_user ?>" method="post">
+                            <form action="insert_log/insert_payment.php?id_user='.$id_user.'"method="post">
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">จำนวนเงินที่ต้องการเติม</label>
                                     <input type="number" class="form-control" id="search-input" placeholder="จำนวนเงิน"
@@ -332,7 +313,10 @@ $conn->close();
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>';
+
+            }
+            ?>
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">

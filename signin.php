@@ -8,7 +8,7 @@ if (isset($_SESSION['username'], $_SESSION['perm'])) {
     } else if ($_SESSION["perm"] == 3) {
         header("Location: form.php");
     } else if ($_SESSION["perm"] == 2) {
-        header("Location: payment.php?id_user=".$_SESSION["id_user"]."");
+        header("Location: payment.php?id_user=" . $_SESSION["id_user"] . "");
     } else {
         header("Location: logout/logout.php");
     }
@@ -84,7 +84,8 @@ if (isset($_SESSION['username'], $_SESSION['perm'])) {
                             </div>
                             <div class="form-floating mb-4">
                                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                                    name="pass" required>
+                                    name="pass" pattern="[A-Za-z0-9]{6,}"
+                                    title="รหัสผ่านควรมีอย่างน้อย 6 ตัวอักษร A-Z a-z 0-9" required>
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>

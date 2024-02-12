@@ -12,6 +12,8 @@ if ($perm == 0) {
     $rank = "Admin";
 } else if ($perm == 3) {
     $rank = "Top-up officer";
+} else if ($perm == 2) {
+    $rank = "Student";
 } else {
     $rank = "";
 }
