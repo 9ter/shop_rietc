@@ -11,8 +11,15 @@ if (!isset($_SESSION['username'])) {
 }
 $perm = $_SESSION["perm"];
 
-include('config.php');
+if ($perm == 0 || $perm == 1) {
+    //header("Location: signin.php");
+} else {
+    header("Location: signin.php");
+}
+
 include('sector/sidebar.php');
+
+include('config.php');
 
 $shop_name = $_GET['shop_name'];
 
@@ -139,7 +146,7 @@ $conn->close();
                         <h6 class="mb-0">
                             <?php echo $_SESSION['username'] ?>
                         </h6>
-                        <span>Admin</span>
+                        <span><?php echo $rank; ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -169,7 +176,11 @@ class="fa fa-laptop me-2"></i>ร้านค้า</a>
                     } else if ($perm == 3) {
                         echo '<a href="form.php" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>เติมเงิน</a>';
 
-                    } else {
+                    }
+                    else if ($perm == 1) {
+                        echo '<a href="form.php" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>ข้อมูลธุรกรรม</a>';
+
+                    }  else {
                         echo 'An error occurred.';
                     }
 

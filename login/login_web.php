@@ -31,6 +31,9 @@ if (isset($_POST['user'], $_POST['pass'])) {
             } else if ($perm == 2) {
                 header("Location: ../payment.php?id_user=" . $id_user . "");
                 exit();
+            } else if ($perm == 1) {
+                header("Location: ../manage/shop_list_view.php?id_user=" . $id_user . "");
+                exit();
             } else {
                 header("Location: ../signin.php?error=invalid_perm");
                 exit();
