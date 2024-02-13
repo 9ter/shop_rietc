@@ -283,19 +283,19 @@ if (isset($_GET['id_user']) && is_numeric($_GET['id_user'])) {
                     </div>
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-100 p-4">
-                            <h6 class="mb-4">เปลี่ยนรหัสผ่าน(ยังไม่ได้วางระบบ)</h6>
+                            <h6 class="mb-4">เปลี่ยนรหัสผ่าน</h6>
                             <form action="admin_password_edit.php?id_user=<?php echo $id_user ?>" method="post">
                                 <div class="row mb-3">
                                     <div class="col-sm-10">
                                         <label class="form-label">รหัสผ่านเก่า</label>
-                                        <input type="text" class="form-control" id="search-input1"
+                                        <input type="password" class="form-control" id="search-input1"
                                             placeholder="รหัสผ่านเก่า" name="pass" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-10">
                                         <label class="form-label">รหัสผ่านใหม่</label>
-                                        <input type="text" class="form-control" name="newpass"
+                                        <input type="password" class="form-control" name="newpass"
                                             placeholder="รหัสผ่านใหม่" required>
                                     </div>
                                 </div>

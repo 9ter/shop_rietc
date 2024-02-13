@@ -27,7 +27,7 @@ if (isset($_FILES["fileToUpload"])) {
 
             include('../config.php');
 
-            $tableName = "test";
+            $tableName = "user";
             $columnNames = array('id_user', 'user', 'pass', 'perm', 'fname', 'lname', 'status');
 
             // Array to store SQL queries
@@ -44,7 +44,7 @@ if (isset($_FILES["fileToUpload"])) {
                     $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
 
                     // Check if user already exists in the database
-                    $checkUserSql = "SELECT * FROM $tableName WHERE user = '$user' AND id_user = ";
+                    $checkUserSql = "SELECT * FROM $tableName WHERE user = '$user'";
                     $result = $conn->query($checkUserSql);
 
                     if ($result->num_rows == 0) {
