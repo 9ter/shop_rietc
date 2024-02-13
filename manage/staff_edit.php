@@ -26,6 +26,7 @@ if (isset($_GET['id_user']) && is_numeric($_GET['id_user'])) {
 
     $id_user = $_GET['id_user'];
 
+
     // Prepare and bind the parameter to avoid SQL injection
     $stmt = $conn->prepare("SELECT * FROM user WHERE id_user = ?");
     $stmt->bind_param("i", $id_user);
@@ -45,7 +46,13 @@ if (isset($_GET['id_user']) && is_numeric($_GET['id_user'])) {
     $stmts_shop = $conn->prepare("SELECT * FROM shop WHERE id_user = ?");
     $stmts_shop->bind_param("i", $id_user);
     $stmts_shop->execute();
-    $result_shopr = $stmts_shop->get_result();
+    $result_shop = $stmts_shop->get_result();
+
+    $maker = $row_user['user'];
+    $stmts_maker = $conn->prepare("SELECT * FROM data_log WHERE maker = ? AND mode = 0 ");
+    $stmts_maker->bind_param("s", $maker);
+    $stmts_maker->execute();
+    $result_maker = $stmts_maker->get_result();
 
     // Check if the shop query was successful
 
@@ -277,18 +284,17 @@ if (isset($_GET['id_user']) && is_numeric($_GET['id_user'])) {
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-100 p-4">
                             <h6 class="mb-4">เปลี่ยนรหัสผ่าน(ยังไม่ได้วางระบบ)</h6>
-                            <form action="insert_log/insert_rfid.php" method="post">
+                            <form action="admin_password_edit.php?id_user=<?php echo $id_user ?>" method="post">
                                 <div class="row mb-3">
                                     <div class="col-sm-10">
-                                        <label for="exampleInputEmail1" class="form-label">รหัสผ่านเก่า</label>
+                                        <label class="form-label">รหัสผ่านเก่า</label>
                                         <input type="text" class="form-control" id="search-input1"
                                             placeholder="รหัสผ่านเก่า" name="pass" required>
-                                        <div id="search-results1"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-10">
-                                        <label for="exampleInputEmail1" class="form-label">รหัสผ่านใหม่</label>
+                                        <label class="form-label">รหัสผ่านใหม่</label>
                                         <input type="text" class="form-control" name="newpass"
                                             placeholder="รหัสผ่านใหม่" required>
                                     </div>
@@ -321,7 +327,7 @@ if (isset($_GET['id_user']) && is_numeric($_GET['id_user'])) {
                             </thead>
                             <tbody>';
                 // Proceed with further operations
-                while ($row = mysqli_fetch_assoc($result_shopr)) {
+                while ($row = mysqli_fetch_assoc($result_shop)) {
 
                     echo "<tr><td>" . $row['id_user'] . "</td> ";
                     echo "<td>" . $row['shop_name'] . "</td> ";
@@ -332,6 +338,43 @@ if (isset($_GET['id_user']) && is_numeric($_GET['id_user'])) {
                     }
                     echo "<td>" . $row['time'] . "</td> ";
                     echo "<td><a class='btn btn-sm btn-primary' href='shop_edit.php?id=" . $row['id'] . "'>EDIT</a></td>";
+                    echo '</tr>';
+                }
+                echo '</tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>';
+            }
+            if ($stmts_maker->affected_rows > 0) {
+                echo '  <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">ร้านค้า</h6>
+                        <a href="showall.php?money_in=1">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-start align-middle table-bordered table-hover mb-0">
+                            <thead>
+                                <tr class="text-white">
+                                    <th scope="col">หมายเลขทำรายการ</th>
+                                    <th scope="col">ชื่อรายการ</th>
+                                    <th scope="col">ผู้รับ</th>
+                                    <th scope="col">จำนวนเงิน</th>
+                                    
+                                    <th scope="col">วันที่</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+                // Proceed with further operations
+                while ($row = mysqli_fetch_assoc($result_maker)) {
+
+                    echo "<tr><td>" . $row['id_order'] . "</td> ";
+                    echo "<td>" . $row['shop_name'] . "</td> ";
+                    echo "<td>" . $row['id_user'] . "</td> ";
+                    echo "<td>" . $row['price'] . "</td> ";
+
+                    echo "<td>" . $row['time'] . "</td> ";
                     echo '</tr>';
                 }
                 echo '</tbody>

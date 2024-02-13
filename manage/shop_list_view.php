@@ -162,7 +162,7 @@ if (isset($_GET['id_user'])) {
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.php" class="nav-item nav-link "><i
+                    <a href="#" class="nav-item nav-link active"><i
                             class="fa fa-tachometer-alt me-2"></i>เลือกร้านค้า</a>
                 </div>
             </nav>
